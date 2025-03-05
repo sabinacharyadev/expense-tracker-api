@@ -6,6 +6,7 @@ import {
 import { findUserById } from "../model/userModel.js";
 import {
   createTransaction,
+  deleteTransaction,
   getTransactions,
 } from "../model/transactionModel.js";
 const transactionRouter = express.Router();
@@ -33,6 +34,29 @@ transactionRouter.post("/", async (req, res) => {
           "Transaction created successfully"
         )
       : buildErrorResponse(res, "Could not create transaction");
+  } catch (error) {
+    buildErrorResponse(res, "Something went wrong");
+    console.log(error);
+  }
+});
+
+// DELETE | DELETE Transactions
+transactionRouter.delete("/", async (req, res) => {
+  try {
+    const { authorization } = req.headers;
+    const { data } = req.body;
+    const user = await findUserById(authorization);
+    if (!user._id) {
+      return buildErrorResponse(res, "User not authorized");
+    }
+    const response = await deleteTransaction(data);
+    response
+      ? buildSuccessResponse(
+          res,
+          response,
+          "Transaction(s) deleted successfully"
+        )
+      : buildErrorResponse(res, "Could not delete transaction");
   } catch (error) {
     buildErrorResponse(res, "Something went wrong");
     console.log(error);
