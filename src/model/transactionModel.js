@@ -7,3 +7,7 @@ export const createTransaction = (transactionObject) => {
 export const getTransactions = (userId) => {
   return transactionModel.find({ userId });
 };
+
+export const deleteTransaction = (selectedIds) => {
+  return transactionModel.deleteMany({ _id: selectedIds });
+};
