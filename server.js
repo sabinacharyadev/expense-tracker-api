@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { connectToMongoDB } from "./src/config/dbConfig.js";
 import userRouter from "./src/router/userRouter.js";
+import transactionRouter from "./src/router/transactionRouter.js";
 
 const PORT = process.env.PORT || 3000;
 
@@ -14,7 +15,7 @@ app.use(express.json());
 connectToMongoDB();
 
 app.use("/api/user", userRouter);
-//app.use('api/transaction' transactionRouter)
+app.use("api/transaction", transactionRouter);
 
 app.listen(PORT, (error) => {
   error
