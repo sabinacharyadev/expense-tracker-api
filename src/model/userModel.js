@@ -1,9 +1,9 @@
-import userModel from "../schema/userSchema";
+import userModel from "../schema/userSchema.js";
 
 export const createUser = (userObject) => {
   return userModel(userObject).save();
 };
 
 export const findUserByEmail = (email) => {
-  return userModel.find({ email });
+  return userModel.findOne({ email });
 };

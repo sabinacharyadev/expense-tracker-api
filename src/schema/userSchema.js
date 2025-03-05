@@ -18,9 +18,8 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    lowercase: true,
   },
 });
 
-const userModel = mongoose.Model("user", userSchema);
+const userModel = mongoose.model("user", userSchema);
 export default userModel;
