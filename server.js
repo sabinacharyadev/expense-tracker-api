@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { connectToMongoDB } from "./src/config/dbConfig.js";
+import userRouter from "./src/router/userRouter.js";
 
 const PORT = process.env.PORT || 3000;
 
@@ -11,6 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 connectToMongoDB();
+
+app.use("/api/user", userRouter);
 
 app.listen(PORT, (error) => {
   error
