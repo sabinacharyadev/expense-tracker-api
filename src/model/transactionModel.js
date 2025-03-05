@@ -1,4 +1,4 @@
-import transactionModel from "../schema/transactionSchema";
+import transactionModel from "../schema/transactionSchema.js";
 
 export const createTransaction = (transactionObject) => {
   return transactionModel(transactionObject).save();

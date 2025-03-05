@@ -15,7 +15,7 @@ app.use(express.json());
 connectToMongoDB();
 
 app.use("/api/user", userRouter);
-app.use("api/transaction", transactionRouter);
+app.use("/api/transaction", transactionRouter);
 
 app.listen(PORT, (error) => {
   error

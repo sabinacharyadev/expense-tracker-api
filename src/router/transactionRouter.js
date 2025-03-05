@@ -2,21 +2,30 @@ import express from "express";
 import {
   buildErrorResponse,
   buildSuccessResponse,
-} from "../utility/responseHelper";
-import { findUserById } from "../model/userModel";
-import { createTransaction, getTransactions } from "../model/transactionModel";
+} from "../utility/responseHelper.js";
+import { findUserById } from "../model/userModel.js";
+import {
+  createTransaction,
+  getTransactions,
+} from "../model/transactionModel.js";
 const transactionRouter = express.Router();
 
 // POST | CREATE Transactions
 transactionRouter.post("/", async (req, res) => {
   try {
     const { authorization } = req.headers;
-    const { title, type, amount, date } = req.body;
+    const { title, type, amount, date, userId } = req.body;
     const user = await findUserById(authorization);
     if (!user._id) {
       return buildErrorResponse(res, "User not authorized");
     }
-    const transaction = await createTransaction({ title, type, amount, date });
+    const transaction = await createTransaction({
+      title,
+      type,
+      amount,
+      date,
+      userId,
+    });
     transaction._id
       ? buildSuccessResponse(
           res,
