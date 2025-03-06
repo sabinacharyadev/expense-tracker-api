@@ -44,12 +44,11 @@ transactionRouter.post("/", async (req, res) => {
 transactionRouter.delete("/", async (req, res) => {
   try {
     const { authorization } = req.headers;
-    const { data } = req.body;
     const user = await findUserById(authorization);
     if (!user._id) {
       return buildErrorResponse(res, "User not authorized");
     }
-    const response = await deleteTransaction(data);
+    const response = await deleteTransaction(req.body);
     response
       ? buildSuccessResponse(
           res,
