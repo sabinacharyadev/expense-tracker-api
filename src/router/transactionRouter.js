@@ -17,7 +17,7 @@ transactionRouter.post("/", async (req, res) => {
     const { authorization } = req.headers;
     const { title, type, amount, date, userId } = req.body;
     const user = await findUserById(authorization);
-    if (!user._id) {
+    if (!user?._id) {
       return buildErrorResponse(res, "User not authorized");
     }
     const transaction = await createTransaction({
